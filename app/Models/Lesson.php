@@ -9,6 +9,9 @@ class Lesson extends Model
 {
     use HasFactory;
 
+    //asignacion masiva(campos que se quiere evitar que se asignen)
+    protected $guarded = ['id'];
+
     //relacion uno a uno
     public function description()
     {
@@ -35,5 +38,16 @@ class Lesson extends Model
     public function resource()
     {
         return $this->morphOne('App\Models\Resource', 'resourceable');
+    }
+
+    //relacion uno a muchos polimorfica
+    public function comments()
+    {
+        return $this->morphMany('App\Models\Comment', 'commentable');
+    }
+
+    public function reactions()
+    {
+        return $this->morphMany('App\Models\Reaction', 'reactionable');
     }
 }

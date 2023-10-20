@@ -13,6 +13,9 @@ class Course extends Model
     const REVISION=2;
     const PUBLICADO=3;
 
+    //asignacion masiva(campos que se quiere evitar que se asignen)
+    protected $guarded = ['id', 'status'];
+
     public function requirements()
     {
         return $this->hasMany('App\Models\Requirements');
@@ -67,5 +70,16 @@ class Course extends Model
     public function category()
     {
         return $this->belongsTo('App\Models\Category');
+    }
+
+    //relacion uno a uno polimorfica
+    public function image()
+    {
+        return $this->morphOne('App\Models\Image', 'imageable');
+    }
+
+    public function lessons()
+    {
+        return $this->hasManyThrough('App\Models\Lesson', 'App\Models\Section');
     }
 }

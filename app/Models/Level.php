@@ -9,6 +9,9 @@ class Level extends Model
 {
     use HasFactory;
     
+    //asignacion masiva(campos que se quiere evitar que se asignen)
+    protected $guarded = ['id'];
+
     //relación uno a muchos
     public function courses()
     {
