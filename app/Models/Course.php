@@ -9,12 +9,28 @@ class Course extends Model
 {
     use HasFactory;
 
+    //asignacion masiva(campos que se quiere evitar que se asignen)
+    protected $guarded = ['id', 'status'];
+    protected $withCount = ['students', 'reviews'];
+
     const BORRADOR=1;
     const REVISION=2;
     const PUBLICADO=3;
 
-    //asignacion masiva(campos que se quiere evitar que se asignen)
-    protected $guarded = ['id', 'status'];
+    public function getRatingAttribute()
+    {
+
+        if($this->reviews_count)
+        {
+            return round($this->reviews->avg('rating'), 1);
+        }
+        else
+        {
+            return 5;
+        }
+
+        
+    }
 
     public function requirements()
     {
@@ -43,7 +59,7 @@ class Course extends Model
     }
 
     //relación muchos a muchos
-    public function student()
+    public function students()
     {
         return $this->belongsToMany('App\Models\User');
     }
