@@ -19,7 +19,6 @@ class Course extends Model
 
     public function getRatingAttribute()
     {
-
         if($this->reviews_count)
         {
             return round($this->reviews->avg('rating'), 1);
@@ -28,8 +27,11 @@ class Course extends Model
         {
             return 5;
         }
+    }
 
-        
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 
     public function requirements()

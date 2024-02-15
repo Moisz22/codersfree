@@ -11,7 +11,7 @@ class HomeController extends Controller
 
         return $courses; */
 
-        $courses = Course::find(24)->where('status', 3)->latest()->get();
+        $courses = Course::find(24)->where('status', 3)->latest()->get()->take(12);
 
         return view('welcome', compact('courses'));
     }

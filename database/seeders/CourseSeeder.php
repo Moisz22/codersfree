@@ -21,7 +21,7 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-        $courses = Course::factory(40)->create(); //correr los registros del seeder usando fabricas
+        $courses = Course::factory(100)->create(); //correr los registros del seeder usando fabricas
 
         foreach ($courses as $course)
         {
