@@ -11,18 +11,17 @@
                         Categoría
                         <i class="fas fa-angle-down text-sm ml-2"></i> 
                     </button>
-    
+                    
+
                     <div class="absolute right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl" x-show="open" x-on:click.away="open = false">
-                        <a href="#" class="transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded">aaa</a>
-                        <div class="py-2">
-                            <hr></hr>
-                        </div>
-                        <a href="#" class="transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded">
-                            Logout
-                        </a>
+                        
+                        @foreach ($categories as $category)
+                            <a wire:click="$set('category_id', {{$category->id}})" x-on:click="open = false" class="cursor-pointer transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 hover:bg-blue-500 hover:text-white rounded">{{$category->name}}</a>    
+                        @endforeach
+                        
                     </div>
                 </div>
-
+                
                 <div class="relative" x-data="{open: false}">
                     <button x-on:click="open = !open" class="px-4 bg-white h-12 shadow focus:outline-none rounded-lg text-gray-700 mr-4">
                         <i class="fas fa-glasses text-sm mr-2"></i>
@@ -31,13 +30,9 @@
                     </button>
     
                     <div class="absolute right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl" x-show="open" x-on:click.away="open = false">
-                        <a href="#" class="transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded">aaa</a>
-                        <div class="py-2">
-                            <hr></hr>
-                        </div>
-                        <a href="#" class="transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded">
-                            Logout
-                        </a>
+                        @foreach ($levels as $level)
+                            <a wire:click="$set('level_id', {{$level->id}})" x-on:click="open = false" class="cursor-pointer transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 hover:bg-blue-500 hover:text-white rounded">{{$level->name}}</a>
+                        @endforeach
                     </div>
                 </div>
         </div>
